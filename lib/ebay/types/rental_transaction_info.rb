@@ -8,6 +8,7 @@ module Ebay # :nodoc:
     #  numeric_node :rental_price, 'RentalPrice', :optional => true
     #  numeric_node :item_buyout_price, 'ItemBuyoutPrice', :optional => true
     #  text_node :rental_status, 'RentalStatus', :optional => true
+    #  text_node :extended_days, 'ExtendedDays', :optional => true
     class RentalTransactionInfo
       include XML::Mapping
       include Initializer
@@ -19,6 +20,7 @@ module Ebay # :nodoc:
       numeric_node :rental_price, 'RentalPrice', :optional => true
       numeric_node :item_buyout_price, 'ItemBuyoutPrice', :optional => true
       text_node :rental_status, 'RentalStatus', :optional => true
+      text_node :extended_days, 'ExtendedDays', :optional => true
     end
   end
 end
