@@ -146,3 +146,17 @@ task :upload => :rdoc do
   pub = Rake::SshDirPublisher.new user, project, local_dir
   pub.upload
 end
+
+require 'jeweler'
+Jeweler::Tasks.new do |gem|
+  # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
+  gem.name = "ebay"
+  gem.homepage = "https://github.com/bkr/ebay"
+  gem.license = "MIT"
+  gem.summary = %Q{Ruby Gem to interact with Ebay APIs}
+  gem.description = %Q{Ruby Gem to interact with Ebay APIs - Extension of http://ebayapi.rubyforge.org by Cody Fauser}
+  gem.email = "paolo.resmini@bookrenter.com"
+  gem.authors = ["presmini"]
+  # dependencies defined in Gemfile
+end
+Jeweler::RubygemsDotOrgTasks.new
