@@ -5,3 +5,4 @@ examples/config.rb
 coverage
 rdoc
 pkg
+.DS_Store
