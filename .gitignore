@@ -1,2 +1,7 @@
 lib/ebay/schema/ebaySvc.xsd
 examples/config.rb
+
+## PROJECT::GENERAL
+coverage
+rdoc
+pkg
