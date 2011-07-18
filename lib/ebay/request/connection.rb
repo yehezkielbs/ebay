@@ -31,6 +31,7 @@ module Ebay #:nodoc:
 
     def initialize(site)
       @site = site
+      
     end
 
     def post(path, body, headers)

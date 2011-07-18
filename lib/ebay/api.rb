@@ -10,10 +10,12 @@ module Ebay #:nodoc:
 
   class RequestError < EbayError #:nodoc:
     attr_reader :errors
+    attr_reader :response
 
-    def initialize(errors)
+    def initialize(errors, response = nil)
       @errors = errors
-    end
+      @response = response
+    end  
   end
 
   # == Overview
@@ -191,10 +193,14 @@ module Ebay #:nodoc:
       result << REXML::XMLDecl.new('1.0', 'UTF-8')
       result << request.save_to_xml
       result.root.add_namespace namespace
-      Rails.logger.debug("------------------------------------------------------------------------------------------------------")
-      Rails.logger.debug("Ebay Request")
-      Rails.logger.debug("#{result.to_s}")
-      Rails.logger.debug("------------------------------------------------------------------------------------------------------")
+      
+      if(defined? Rails) then
+        Rails.logger.debug("------------------------------------------------------------------------------------------------------")
+        Rails.logger.debug("Ebay Request")
+        Rails.logger.debug("#{result.to_s}")
+        Rails.logger.debug("------------------------------------------------------------------------------------------------------")
+      end
+
       result.to_s
     end
 
@@ -234,14 +240,17 @@ module Ebay #:nodoc:
           xml = REXML::Document.new(content)
           # Fixes the wrong case of API returned by eBay
           fix_root_element_name(xml)
-          Rails.logger.debug("------------------------------------------------------------------------------------------------------")
-          Rails.logger.debug("Ebay Response")
-          Rails.logger.debug("#{xml.to_s}")
-          Rails.logger.debug("------------------------------------------------------------------------------------------------------")
+          
+          if defined? Rails then
+            Rails.logger.debug("------------------------------------------------------------------------------------------------------")
+            Rails.logger.debug("Ebay Response")
+            Rails.logger.debug("#{xml.to_s}")
+            Rails.logger.debug("------------------------------------------------------------------------------------------------------")
+          end
           result = XML::Mapping.load_object_from_xml(xml.root)
           case result.ack
             when Ebay::Types::AckCode::Failure, Ebay::Types::AckCode::PartialFailure
-              raise RequestError.new(result.errors)
+              raise RequestError.new(result.errors, result)
           end
         when :raw
           result = content

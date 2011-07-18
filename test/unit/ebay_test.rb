@@ -77,6 +77,24 @@ class EbayTest < Test::Unit::TestCase
     end
   end
   
+  def test_errors_on_add_items
+    Ebay::HttpMock.respond_with responses(:add_items_failure)
+    begin
+      @ebay.add_items
+    rescue Ebay::RequestError => exception
+      assert_equal 1, exception.errors.size
+      error = exception.errors.first
+      assert_equal 'Errors in Input Data.', error.short_message
+      assert_equal ErrorClassificationCode::RequestError, error.error_classification
+      
+      assert_not_nil exception.response
+      assert exception.response.instance_of? Ebay::Responses::AddItems
+      assert exception.response.add_item_response_containers.size, 2
+      assert exception.response.add_item_response_containers.first.errors.size, 1
+      
+    end
+  end
+  
   def test_unknown_request_raises_no_method_error
     assert_raise(NoMethodError) do 
       @ebay.get_sushi
