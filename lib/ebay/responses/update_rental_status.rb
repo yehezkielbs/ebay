@@ -1,3 +1,5 @@
+require 'ebay/types/error_message'
+
 module Ebay # :nodoc:
   module Responses # :nodoc:
     # == Attributes
@@ -8,6 +10,7 @@ module Ebay # :nodoc:
     #  text_node :category_id, 'CategoryID', :optional => true
     #  text_node :category2_id, 'Category2ID', :optional => true
     #  value_array_node :discount_reasons, 'DiscountReason', :default_value => []
+    #  object_node :error_message, 'errorMessage', :class => ErrorMessage, :optional => true
     class UpdateRentalStatus < Abstract
       include XML::Mapping
       include Initializer
@@ -16,6 +19,7 @@ module Ebay # :nodoc:
       time_node :timestamp, 'timestamp', :optional => true
       text_node :ack, 'ack', :optional => true
       text_node :version, 'version', :optional => true
+      object_node :error_message, 'errorMessage', :class => ErrorMessage, :optional => true
     end
   end
 end
