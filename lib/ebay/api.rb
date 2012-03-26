@@ -3,6 +3,7 @@ require 'zlib'
 require 'stringio'
 require 'ebay/request/connection'
 require 'ebay/api_methods'
+require 'ebay/types/xml_requester_credentials'
 
 module Ebay #:nodoc:
   class EbayError < StandardError #:nodoc:
@@ -132,14 +133,17 @@ module Ebay #:nodoc:
       @service_key = service_key
 
       if (@service_key == nil)
-        params[:username] = username
-        params[:password] = password
         params[:auth_token] = auth_token
       end
 
       request = request_class.new(params)
       yield request if block_given?
+      build_requester_credentials(request)
       invoke(request, format)
+    end
+
+    def build_requester_credentials(request)
+      request.requester_credentials = Ebay::Types::XMLRequesterCredentials.new(:ebay_auth_token => request.auth_token) if request.auth_token
     end
 
     def invoke(request, format)
