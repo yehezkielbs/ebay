@@ -2,8 +2,8 @@ $:.unshift File.join(File.dirname(__FILE__), 'lib')
 require 'rubygems'
 require 'rake'
 require 'rake/testtask'
-require 'rake/rdoctask'
-require 'rake/gempackagetask'
+require 'rdoc/task'
+require "rubygems/package_task"
 require 'rake/contrib/rubyforgepublisher'
 
 PKG_VERSION = "0.12.0"
@@ -23,14 +23,14 @@ namespace :test do
   desc 'Run all unit tests.'
   Rake::TestTask.new(:units) do |t|
     t.libs << "test"
-  	t.pattern = 'test/unit/**/*_test.rb'
+    t.pattern = "test/unit/**/*_test.rb"
     t.verbose = true
   end
   
   desc 'Run all unit tests.'
   Rake::TestTask.new(:mapping) do |t|
     t.libs << "test"
-  	t.pattern = 'test/mapping/**/*_test.rb'
+  	t.pattern = "test/mapping/**/*_test.rb"
     t.verbose = true
   end
 end
@@ -94,7 +94,7 @@ namespace :classes do
   end
 end
 
-Rake::RDocTask.new { |rdoc|
+RDoc::Task.new do |rdoc|
   rdoc.rdoc_dir = 'doc'
   rdoc.title    = "eBayAPI Ruby client for the eBay unified schema XML API"
   rdoc.options << '--line-numbers' << '--inline-source' << '--main=README'
@@ -102,7 +102,7 @@ Rake::RDocTask.new { |rdoc|
   rdoc.rdoc_files.include('lib/**/*.rb')
   rdoc.rdoc_files.exclude('lib/ebay/schema')
   rdoc.rdoc_files.exclude('lib/support')
-}
+end
 
 spec = Gem::Specification.new do |s|
   s.name = PKG_NAME
@@ -118,7 +118,7 @@ spec = Gem::Specification.new do |s|
   s.add_dependency('money', '= 1.7.1')
 end
 
-Rake::GemPackageTask.new(spec) do |p|
+Gem::PackageTask.new(spec) do |p|
   p.gem_spec = spec
   p.need_tar = true
   p.need_zip = true

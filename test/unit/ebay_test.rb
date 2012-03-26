@@ -89,8 +89,8 @@ class EbayTest < Test::Unit::TestCase
       
       assert_not_nil exception.response
       assert exception.response.instance_of? Ebay::Responses::AddItems
-      assert exception.response.add_item_response_containers.size, 2
-      assert exception.response.add_item_response_containers.first.errors.size, 1
+      assert_equal exception.response.add_item_response_containers.size, 2
+      assert_equal exception.response.add_item_response_containers.first.errors.size, 1
       
     end
   end
