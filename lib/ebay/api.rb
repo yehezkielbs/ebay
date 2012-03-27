@@ -137,8 +137,8 @@ module Ebay #:nodoc:
       end
 
       request = request_class.new(params)
-      yield request if block_given?
       build_requester_credentials(request)
+      yield request if block_given?
       invoke(request, format)
     end
 
