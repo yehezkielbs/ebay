@@ -4,14 +4,14 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{ebay}
-  s.version = "0.13.0"
+  s.name = "ebay"
+  s.version = "0.17.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["presmini"]
-  s.date = %q{2011-07-18}
-  s.description = %q{Ruby Gem to interact with Ebay APIs - Extension of http://ebayapi.rubyforge.org by Cody Fauser}
-  s.email = %q{paolo.resmini@bookrenter.com}
+  s.date = "2012-03-27"
+  s.description = "Ruby Gem to interact with Ebay APIs - Extension of http://ebayapi.rubyforge.org by Cody Fauser"
+  s.email = "paolo.resmini@bookrenter.com"
   s.extra_rdoc_files = [
     "README"
   ]
@@ -21,6 +21,7 @@ Gem::Specification.new do |s|
     "README",
     "Rakefile",
     "VERSION",
+    "ebay.gemspec",
     "examples/add_item.rb",
     "examples/add_member_message_aaq_to_partner.rb",
     "examples/config.template.rb",
@@ -634,7 +635,9 @@ Gem::Specification.new do |s|
     "lib/ebay/types/end_reason_code.rb",
     "lib/ebay/types/error.rb",
     "lib/ebay/types/error_classification_code.rb",
+    "lib/ebay/types/error_for_half_rental_service.rb",
     "lib/ebay/types/error_handling_code.rb",
+    "lib/ebay/types/error_message.rb",
     "lib/ebay/types/error_parameter.rb",
     "lib/ebay/types/escrow_code.rb",
     "lib/ebay/types/exclude_shipping_location_details.rb",
@@ -1241,11 +1244,11 @@ Gem::Specification.new do |s|
     "test/unit/xml_mapping_time_node_test.rb",
     "test/unit/xml_mapping_value_array_node_test.rb"
   ]
-  s.homepage = %q{https://github.com/bkr/ebay}
+  s.homepage = "https://github.com/bkr/ebay"
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.4.2}
-  s.summary = %q{Ruby Gem to interact with Ebay APIs}
+  s.rubygems_version = "1.8.17"
+  s.summary = "Ruby Gem to interact with Ebay APIs"
 
   if s.respond_to? :specification_version then
     s.specification_version = 3
