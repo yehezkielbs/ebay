@@ -276,6 +276,8 @@ module Ebay # :nodoc:
       array_node :item_compatibility_lists, 'ItemCompatibilityList', 'Compatibility', :class => ItemCompatibility, :default_value => []
       numeric_node :item_compatibility_count, 'ItemCompatibilityCount', :optional => true
       object_node :rental, 'Rental', :class => Rental, :optional => true
+      text_node :vin, 'VIN', :optional => true
+      text_node :seller_provided_title, 'SellerProvidedTitle', :optional => true
     end
   end
 end
